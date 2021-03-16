@@ -1,0 +1,20 @@
+
+type Event {
+    result : String!
+}
+
+type TodoList {
+    id : String!
+    todo : String!
+}
+
+type Query {
+    getTodos : [TodoList]
+}
+
+type Mutation {
+    addTodo(todo : String!): Event
+    updateTodo(todo : String! , id : String!): Event
+    deleteTodo(id : String!):Event
+}
+
