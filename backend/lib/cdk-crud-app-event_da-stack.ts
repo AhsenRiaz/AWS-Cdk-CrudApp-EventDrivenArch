@@ -4,6 +4,8 @@ import * as events from "@aws-cdk/aws-events"
 import * as dynamodb from "@aws-cdk/aws-dynamodb"
 import * as targets from "@aws-cdk/aws-events-targets"
 import * as lambda from "@aws-cdk/aws-lambda"
+import * as cognito from "@aws-cdk/aws-cognito"
+
 
 import { requestTemplate, responseTempalte } from '../utils/appsync-request-response';
 
@@ -12,6 +14,44 @@ export class CdkCrudAppEventDaStack extends cdk.Stack {
     super(scope, id, props);
 
     // The code that defines your stack goes here
+
+    // creating the userPool
+
+    const userPool = new cognito.UserPool(this , "Crud_App_EDA_UserPool" , {
+      userPoolName : "Crud_App_EDA_UserPool",
+      selfSignUpEnabled : true , 
+      accountRecovery : cognito.AccountRecovery.EMAIL_ONLY,
+      userVerification : {
+        emailStyle : cognito.VerificationEmailStyle.CODE,
+        smsMessage : 'Hello {username} , Thanks for signing up to my awesome app! Your Verification Code is {####}'        
+      },
+      autoVerify : {
+        email : true
+      },
+      standardAttributes : {
+        email : {
+          mutable : true,
+          required : true
+        },
+        phoneNumber : {
+          required : true,
+          mutable : true
+        },
+      },
+    });
+
+    // we need userClient to connect our userpool with our frontend
+    const userPoolClient = new cognito.UserPoolClient(this , "UserPoolClient" , {
+      userPool : userPool
+    });
+
+    new cdk.CfnOutput(this , "UserPoolId" , {
+      value : userPool.userPoolId
+    });
+
+    new cdk.CfnOutput(this , "UserPoolClientId" , {
+      value : userPoolClient.userPoolClientId
+    })
 
     // Creating appsync to manage our graphql apis
     const api = new appsync.GraphqlApi(this , "CrudEventsGraphql" , {

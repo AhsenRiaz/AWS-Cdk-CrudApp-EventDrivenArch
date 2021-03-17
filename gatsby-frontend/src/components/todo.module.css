@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+.Todo_heading{
+    width: 35%;
+    margin: 0px auto;
+    margin-bottom: 2rem;
+    font-family: "Poppins";
+    background-color: lightblue;
+    text-align: center;
+}
+
+.Todo_input{
+    margin-top: 4rem;
+    /* border: 2px solid red; */
+}
+
+.Todo_submit{
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+}
+
+.Todo_field{
+    /* border: 2px solid yellow; */
+    width: 27rem;
+}
+
+.Todo_button{
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+
+/* list */
+
+.Todo_list_div ul li{
+    list-style: none;
+}
+
+.Todo_list_container{
+    margin-top: 4rem;
+}
+
+.list_div{
+    width: 18rem !important;
+}
+
+.Todo_list_div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid rgb(11, 11, 156);
+    font-size: 18px;
+    font-family: "Poppins";
+    margin-bottom: 1rem;
+}
+
+.spinner{
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Todo_updateButton{
+    border: 1px solid green;
+    margin-right: 0.5rem;
+    border-radius: 5px;
+}
+
+.Todo_deleteButton{
+    border: 1px solid rgb(128, 6, 6);
+    border-radius: 5px;
+}

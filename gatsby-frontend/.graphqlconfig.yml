@@ -1,0 +1,15 @@
+projects:
+  Crud-Events-Graphql:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/API.ts
+        docsFilePath: src/graphql
+        region: us-east-1
+        apiId: i5zfkr3h6zfavh33umplznyz7y
+        maxDepth: 2
