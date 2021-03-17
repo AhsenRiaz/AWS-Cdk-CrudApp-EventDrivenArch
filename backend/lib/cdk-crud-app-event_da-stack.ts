@@ -5,6 +5,10 @@ import * as dynamodb from "@aws-cdk/aws-dynamodb"
 import * as targets from "@aws-cdk/aws-events-targets"
 import * as lambda from "@aws-cdk/aws-lambda"
 import * as cognito from "@aws-cdk/aws-cognito"
+import * as s3 from "@aws-cdk/aws-s3"
+import * as s3Deployment from "@aws-cdk/aws-s3-deployment"
+import * as cloudfront from "@aws-cdk/aws-cloudfront"
+import * as origins from "@aws-cdk/aws-cloudfront-origins"
 
 
 import { requestTemplate, responseTempalte } from '../utils/appsync-request-response';
@@ -14,6 +18,15 @@ export class CdkCrudAppEventDaStack extends cdk.Stack {
     super(scope, id, props);
 
     // The code that defines your stack goes here
+
+    // creating the s3Bucket for the current stack
+    const websiteBucket = new s3.Bucket(this , "Crud_App-EDA-Bucket" , {
+      versioned : true,
+      websiteIndexDocument : "index.html",
+      publicReadAccess : true
+    });
+
+    
 
     // creating the userPool
 
