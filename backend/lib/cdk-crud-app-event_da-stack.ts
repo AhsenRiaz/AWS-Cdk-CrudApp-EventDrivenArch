@@ -26,7 +26,24 @@ export class CdkCrudAppEventDaStack extends cdk.Stack {
       publicReadAccess : true
     });
 
-    
+    // cloudFront distribution
+    const CFdist = new cloudfront.Distribution(this , "Crud_App_EDA-Distribution" , {
+      defaultBehavior : {
+        origin : new origins.S3Origin(websiteBucket)
+      }
+    });
+
+    // deploying the bucket
+    new s3Deployment.BucketDeployment(this , "Crud_App_EDA-Deploy" , {
+      sources : [s3Deployment.Source.asset("../gatsby-frontend/public")],
+      destinationBucket : websiteBucket,
+      distribution : CFdist
+    });
+
+    // print the domain on the terminal
+    new cdk.CfnOutput(this , "Crud_App_EDA-URL" , {
+      value : CFdist.domainName
+    });
 
     // creating the userPool
 
